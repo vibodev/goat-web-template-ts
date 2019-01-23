@@ -5,9 +5,10 @@ const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HappyPack = require('happypack')
-var ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+ 
 module.exports = {
   mode: 'production', // development 或 production
   // 入口文件
@@ -124,7 +125,9 @@ module.exports = {
       host: 'localhost',
       port: 8080,
       server: { baseDir: ['dist'] }
-    })
+    }),
+    //
+    new BundleAnalyzerPlugin()
   ]
 }
 // 优化：HappyPack多核利用2

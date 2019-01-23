@@ -4,9 +4,9 @@
   "description": "web前端开发模板项目ts版",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "webpack --watch",
-    "start": "webpack --config webpack.config.js",
-    "preview": "browser-sync start --server 'dist' --files '*.css, *.html,*.js'",
+    "start": "webpack --watch",
+    "build":"NODE_ENV=production webpack --config webpack.config.js",
+    "analyz": "NODE_ENV=production npm_config_report=true npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -47,6 +47,7 @@
     "typescript": "^3.2.4",
     "url-loader": "^1.1.2",
     "webpack": "^4.29.0",
+    "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.2.1",
     "webpack-parallel-uglify-plugin": "^1.1.0"
   },
