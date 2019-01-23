@@ -4,8 +4,9 @@ const webpack = require('webpack')
 // const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const HappyPack = require('happypack');
-var ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const HappyPack = require('happypack')
+var ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
 module.exports = {
   mode: 'production', // development 或 production
@@ -77,7 +78,7 @@ module.exports = {
   plugins: [
     // 清理目录
     // new CleanWebpackPlugin(['dist']),
-    //
+    // 优化：拷贝静态文件
     new CopyWebpackPlugin([{
       from: resolve(__dirname, 'index.html'),
       to: resolve(__dirname, 'dist', 'index.html')
@@ -101,13 +102,13 @@ module.exports = {
       chunksSortMode: 'dependency'
     }),
     // 优化：HappyPack多核利用1
-    getHappyLodaer('url',['url']),
-    getHappyLodaer('css',['style','css']),
-    getHappyLodaer('less',['style','css','less']),
-    //优化：增强代码代码压缩工具
+    getHappyLodaer('url', ['url']),
+    getHappyLodaer('css', ['style', 'css']),
+    getHappyLodaer('less', ['style', 'css', 'less']),
+    // 优化：增强代码代码压缩工具
     new ParallelUglifyPlugin({
       cacheDir: '.cache/',
-      uglifyJS:{
+      uglifyJS: {
         output: {
           comments: false
         },
@@ -115,14 +116,22 @@ module.exports = {
           warnings: false
         }
       }
+    }),
+    //开发预览
+    new BrowserSyncPlugin({
+      // browse to http://localhost:3000/ during development,
+      // ./public directory is being served
+      host: 'localhost',
+      port: 8080,
+      server: { baseDir: ['dist'] }
     })
   ]
 }
 // 优化：HappyPack多核利用2
-function getHappyLodaer(id,loaders){
+function getHappyLodaer (id, loaders) {
   return new HappyPack({
     id: id,
     threads: os.cpus().length,
-    loaders: loaders.map((name)=>name+'-loader')
+    loaders: loaders.map((name) => name + '-loader')
   })
 }

@@ -4,7 +4,7 @@
   "description": "web前端开发模板项目ts版",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot --inline false",
+    "dev": "webpack --watch",
     "start": "webpack --config webpack.config.js",
     "preview": "browser-sync start --server 'dist' --files '*.css, *.html,*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,6 +26,8 @@
   "devDependencies": {
     "@types/mocha": "^5.2.5",
     "awesome-typescript-loader": "^5.2.1",
+    "browser-sync": "^2.26.3",
+    "browser-sync-webpack-plugin": "^2.2.2",
     "clean-webpack-plugin": "^1.0.1",
     "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.1.0",
@@ -46,7 +48,6 @@
     "url-loader": "^1.1.2",
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14",
     "webpack-parallel-uglify-plugin": "^1.1.0"
   },
   "dependencies": {}
