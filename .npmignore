@@ -1,0 +1,30 @@
+# git files #
+######################
+.git
+.gitignore
+#SVN files#
+.svn
+
+# development files #
+######################
+node_modules/
+.idea
+# .vscode
+shrinkwrap.yaml
+yarn.lock
+yarn-error.log
+
+# OS generated files #
+######################
+.DS_Store
+ *.swp
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# other #
+######################
+src

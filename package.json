@@ -1,0 +1,23 @@
+{
+  "name": "goat-web-template-ts",
+  "version": "1.0.0",
+  "description": "web前端开发模板项目ts版",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vibodev/goat-web-template-ts.git"
+  },
+  "keywords": [
+    "web",
+    "ts"
+  ],
+  "author": "Vibo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vibodev/goat-web-template-ts/issues"
+  },
+  "homepage": "https://github.com/vibodev/goat-web-template-ts#readme"
+}
