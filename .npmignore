@@ -13,6 +13,7 @@ node_modules/
 shrinkwrap.yaml
 yarn.lock
 yarn-error.log
+.editorconfig
 
 # OS generated files #
 ######################
