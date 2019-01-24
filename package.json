@@ -4,8 +4,8 @@
   "description": "web前端开发模板项目ts版",
   "main": "dist/index.js",
   "scripts": {
-    "start": "webpack --watch",
-    "build":"NODE_ENV=production webpack --config webpack.config.js",
+    "start": "NODE_ENV=development webpack --config webpack.dev.config.js --mode=development --watch",
+    "build": "webpack --config webpack.prod.config.js --mode=production",
     "analyz": "NODE_ENV=production npm_config_report=true npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -49,6 +49,7 @@
     "webpack": "^4.29.0",
     "webpack-bundle-analyzer": "^3.0.3",
     "webpack-cli": "^3.2.1",
+    "webpack-merge": "^4.2.1",
     "webpack-parallel-uglify-plugin": "^1.1.0"
   },
   "dependencies": {}

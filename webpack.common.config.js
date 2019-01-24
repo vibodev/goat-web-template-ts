@@ -5,10 +5,7 @@ const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const HappyPack = require('happypack')
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
-const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
- 
+
 module.exports = {
   mode: 'production', // development 或 production
   // 入口文件
@@ -34,13 +31,6 @@ module.exports = {
     },
     // 先尝试 ts 后缀的 TypeScript 源码文件
     extensions: ['.ts', '.js']
-  },
-  devServer: {
-    // contentBase: './dist',
-    contentBase: false,
-    inline: true,
-    // hot: true,
-    compress: true
   },
   module: {
     // 不参与编译
@@ -74,60 +64,11 @@ module.exports = {
     ]
   },
   // target: 'electron-renderer',
-  // 输出 source-map 方便直接调试 ES6 源码
-  devtool: 'source-map',
   plugins: [
-    // 清理目录
-    // new CleanWebpackPlugin(['dist']),
-    // 优化：拷贝静态文件
-    new CopyWebpackPlugin([{
-      from: resolve(__dirname, 'index.html'),
-      to: resolve(__dirname, 'dist', 'index.html')
-    },
-      {
-        from: resolve(__dirname, './static'),
-        to: resolve(__dirname, 'dist', './static'),
-        ignore: ['.*']
-      }
-    ]),
-    new HtmlWebpackPlugin({
-      title: 'Goat Web Template',
-      filename: resolve(__dirname, './dist/index.html'),
-      template: 'index.html',
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-      },
-      chunksSortMode: 'dependency'
-    }),
     // 优化：HappyPack多核利用1
     getHappyLodaer('url', ['url']),
     getHappyLodaer('css', ['style', 'css']),
-    getHappyLodaer('less', ['style', 'css', 'less']),
-    // 优化：增强代码代码压缩工具
-    new ParallelUglifyPlugin({
-      cacheDir: '.cache/',
-      uglifyJS: {
-        output: {
-          comments: false
-        },
-        compress: {
-          warnings: false
-        }
-      }
-    }),
-    //开发预览
-    new BrowserSyncPlugin({
-      // browse to http://localhost:3000/ during development,
-      // ./public directory is being served
-      host: 'localhost',
-      port: 8080,
-      server: { baseDir: ['dist'] }
-    }),
-    //
-    new BundleAnalyzerPlugin()
+    getHappyLodaer('less', ['style', 'css', 'less'])
   ]
 }
 // 优化：HappyPack多核利用2

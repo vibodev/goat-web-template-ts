@@ -29,4 +29,5 @@ Thumbs.db
 # other #
 ######################
 src
+debug
 .cache
