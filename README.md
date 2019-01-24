@@ -1,5 +1,8 @@
 # Web前端开发模板项目
-[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-green.svg)](https://standardjs.com)  ![image](https://img.shields.io/badge/node-%3E%3D%208.0.0-yellowgreen.svg) ![image](https://img.shields.io/badge/build-passing-brightgreen.svg) ![image](https://img.shields.io/badge/typescript-90%25-blue.svg) [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-red.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+[![](https://img.shields.io/github/followers/espadrine.svg?label=Follow&style=social)](https://github.com/vibodev/goat-web-template-ts)
+
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-green.svg)](https://standardjs.com)  ![image](https://img.shields.io/badge/node-%3E%3D%208.0.0-yellowgreen.svg) ![image](https://img.shields.io/badge/build-passing-brightgreen.svg) ![image](https://img.shields.io/badge/typescript-90%25-blue.svg) [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC%20BY--NC--ND%204.0-red.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/) ![image](https://img.shields.io/github/languages/code-size/vibodev/goat-web-template-ts.svg)
+
 
 [toc]
 
