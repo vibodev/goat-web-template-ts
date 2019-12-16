@@ -1,9 +1,10 @@
-const {  resolve } = require('path')
+const { resolve } = require('path')
 const os = require('os')
 const webpack = require('webpack')
 // const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const SpritesmithPlugin = require('webpack-spritesmith')
 const HappyPack = require('happypack')
 
 module.exports = {
@@ -15,15 +16,12 @@ module.exports = {
     filename: '[name].bundle.js',
     // 输出文件都放到 dist 目录下
     path: resolve(__dirname, './dist')
-  // 指定存放 JavaScript 文件的 CDN 目录 URL
-  // publicPath: ''
+    // 指定存放 JavaScript 文件的 CDN 目录 URL
+    // publicPath: ''
   },
   resolve: {
     // 优化：缩小搜索范围
-    modules: [
-      resolve('src'),
-      resolve('node_modules')
-    ],
+    modules: [resolve('src'), resolve('node_modules')],
     // 优化：别名
     alias: {
       // 'vue$': 'vue/dist/vue.common.js',
@@ -35,11 +33,18 @@ module.exports = {
   module: {
     // 不参与编译
     // noParse: /node_modules\/(element-ui\.js)/,
-    rules: [{
-      test: /\.(woff|svg|eot|ttf)\??.*$/,
-      include: [resolve(__dirname, 'src/assets')],
-      use: 'happypack/loader?id=url'
-    },
+    rules: [
+      {
+        test: /\.png$/,
+        loaders: [
+          'file-loader' // 使用 file-loader 对 png 图标进行设置
+        ]
+      },
+      {
+        test: /\.(woff|svg|eot|ttf)\??.*$/,
+        include: [resolve(__dirname, 'src/assets')],
+        use: 'happypack/loader?id=url'
+      },
       {
         test: /\.css$/,
         use: 'happypack/loader?id=css'
@@ -65,6 +70,19 @@ module.exports = {
   },
   // target: 'electron-renderer',
   plugins: [
+    new SpritesmithPlugin({
+      src: {
+        cwd: resolve(__dirname, 'src/assets/icons'),
+        glob: '*.png'
+      },
+      target: {
+        image: resolve(__dirname, 'src/assets/sprite.png'),
+        css: resolve(__dirname, 'src/less/sprite.less')
+      },
+      apiOptions: {
+        cssImageRef: '~sprite.png'
+      }
+    }),
     // 优化：HappyPack多核利用1
     getHappyLodaer('url', ['url']),
     getHappyLodaer('css', ['style', 'css']),
@@ -76,6 +94,6 @@ function getHappyLodaer (id, loaders) {
   return new HappyPack({
     id: id,
     threads: os.cpus().length,
-    loaders: loaders.map((name) => name + '-loader')
+    loaders: loaders.map(name => name + '-loader')
   })
 }

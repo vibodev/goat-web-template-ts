@@ -2,27 +2,30 @@ const {  resolve } = require('path')
 const merge = require('webpack-merge')
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 // const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 
 const common = require('./webpack.common.config.js')
 module.exports = merge(common, {
   mode: 'development',
-  output:{
+  output: {
     path: resolve(__dirname, './debug')
   },
   // 输出 source-map 方便直接调试 ES6 源码
   devtool: 'source-map',
   plugins: [
+    new FriendlyErrorsWebpackPlugin(),
     // 清理目录
     // new CleanWebpackPlugin(['debug']),
     // 优化：拷贝静态文件
-    new CopyWebpackPlugin([{
-      from: resolve(__dirname, 'index.html'),
-      to: resolve(__dirname, 'debug', 'index.html')
-    },
+    new CopyWebpackPlugin([
+      {
+        from: resolve(__dirname, 'index.html'),
+        to: resolve(__dirname, 'debug', 'index.html')
+      },
       {
         from: resolve(__dirname, './static'),
         to: resolve(__dirname, 'debug', './static'),
@@ -62,7 +65,7 @@ module.exports = merge(common, {
         }
       }
     }),
-    //开发预览
+    // 开发预览
     new BrowserSyncPlugin({
       // browse to http://localhost:3000/ during development,
       // ./public directory is being served
